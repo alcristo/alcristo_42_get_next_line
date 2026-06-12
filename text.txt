@@ -1,0 +1,10 @@
+Texto de prueba del get next line.
+La siguiente linea sera demasiado corta como para caber en un buffer
+g
+r
+a
+n
+d
+e.
+Esta es la ultima linea. La siguiente debera imprimir un nulo.
+En realidad la anterior no era la ultima linea, pero esta si lo es.
