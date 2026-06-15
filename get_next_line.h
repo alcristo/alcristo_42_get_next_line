@@ -6,7 +6,7 @@
 /*   By: alcristo <alcristo@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 09:47:39 by alcristo          #+#    #+#             */
-/*   Updated: 2026/06/12 10:25:55 by alcristo         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:17:06 by alcristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_gnl
 	char	*nxtl;
 	char	buffer[BUFFER_SIZE + 1];
 	char	*line;
+	char	*temp;
 }			t_gnl;
 char	*get_next_line(int fd);
 size_t	ft_strlen(char const *s);
