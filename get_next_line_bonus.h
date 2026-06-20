@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alcristo <alcristo@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 09:47:39 by alcristo          #+#    #+#             */
-/*   Updated: 2026/06/19 11:51:22 by alcristo         ###   ########.fr       */
+/*   Updated: 2026/06/20 12:45:36 by alcristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
 
-# define GET_NEXT_LINE_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>

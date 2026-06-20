@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alcristo <alcristo@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/09 09:42:11 by alcristo          #+#    #+#             */
-/*   Updated: 2026/06/20 12:40:12 by alcristo         ###   ########.fr       */
+/*   Created: 2026/06/19 11:45:16 by alcristo          #+#    #+#             */
+/*   Updated: 2026/06/20 12:45:46 by alcristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*end_of_line(char **stsh)
 {
@@ -59,24 +59,24 @@ static char	*read_line(int fd, char **stsh)
 
 char	*get_next_line(int fd)
 {
-	static char	*stsh;
+	static char	*stsh[1024];
 	char		*line;
 
-	if (fd < 0 || fd > 1023 || BUFFER_SIZE < 0)
+	if (BUFFER_SIZE < 0 || fd < 0 || fd > 1023)
 		return (NULL);
-	if (!stsh)
+	if (!stsh[fd])
 	{
-		stsh = ft_strdup("");
-		if (!stsh)
+		stsh[fd] = ft_strdup("");
+		if (!stsh[fd])
 			return (NULL);
 	}
-	if (ft_strchr(stsh, '\n'))
+	if (ft_strchr(stsh[fd], '\n'))
 	{
-		line = end_of_line(&stsh);
+		line = end_of_line(&stsh[fd]);
 		return (line);
 	}
-	line = read_line(fd, &stsh);
+	line = read_line(fd, &stsh[fd]);
 	if (!line)
-		return (free(stsh), stsh = NULL, NULL);
+		return (free(stsh[fd]), stsh[fd] = NULL, NULL);
 	return (line);
 }
