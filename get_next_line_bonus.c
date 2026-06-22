@@ -6,7 +6,7 @@
 /*   By: alcristo <alcristo@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 11:45:16 by alcristo          #+#    #+#             */
-/*   Updated: 2026/06/20 12:45:46 by alcristo         ###   ########.fr       */
+/*   Updated: 2026/06/22 15:53:39 by alcristo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@ static char	*end_of_line(char **stsh)
 
 	pos = 0;
 	temp = ft_strdup(*stsh);
+	if (!temp)
+		return (NULL);
 	while (temp[pos] && temp[pos] != '\n')
 		pos++;
-	free(temp);
 	line = ft_substr(*stsh, 0, pos + 1);
-	temp = *stsh;
-	*stsh = ft_substr(*stsh, pos + 1, ft_strlen(*stsh));
+	if (!line)
+		return (free(temp), NULL);
+	free(*stsh);
+	*stsh = ft_substr(temp, pos + 1, ft_strlen(temp));
+	if (!*stsh)
+		return (free(temp), free(line), NULL);
 	free(temp);
 	if (!line[0])
 		return (free(line), NULL);
@@ -50,6 +55,8 @@ static char	*read_line(int fd, char **stsh)
 		buff[reading] = '\0';
 		temp = *stsh;
 		*stsh = ft_strjoin(*stsh, buff);
+		if (!*stsh)
+			return (free(buff), free(temp), NULL);
 		free(temp);
 		if (ft_strchr(*stsh, '\n') || reading < BUFFER_SIZE)
 			return (free(buff), end_of_line(stsh));
@@ -73,10 +80,12 @@ char	*get_next_line(int fd)
 	if (ft_strchr(stsh[fd], '\n'))
 	{
 		line = end_of_line(&stsh[fd]);
+		if (!line)
+			return (free(stsh[fd]), stsh[fd] = NULL, NULL);
 		return (line);
 	}
 	line = read_line(fd, &stsh[fd]);
-	if (!line)
+	if (!line && stsh[fd])
 		return (free(stsh[fd]), stsh[fd] = NULL, NULL);
 	return (line);
 }
